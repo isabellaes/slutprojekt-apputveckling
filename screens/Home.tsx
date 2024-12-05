@@ -3,7 +3,7 @@ import { StyleSheet, Text, ScrollView, View } from "react-native";
 const Home = () => {
   return (
     <View style={styles.container}>
-      <Text>Välkommen Natalie!</Text>
+      <Text>Välkommen!</Text>
       <Text>Dagens datum och klockslag</Text>
       <ScrollView contentContainerStyle={{ gap: 10 }}>
         <View style={styles.box}>
