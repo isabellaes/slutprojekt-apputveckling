@@ -1,17 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+type ListItem = {
+  title: string;
+  description: string;
+  deadline?: Date;
+  status: "checked" | "unchecked" | "indeterminate";
+};
 type List = {
   id: string;
   type?: "check" | "todo";
   title: string;
-  items: [
-    {
-      title: string;
-      description: string;
-      deadline?: Date;
-      status: boolean;
-    }
-  ];
+  items: ListItem[];
 };
 
 type ListState = {
@@ -19,7 +17,70 @@ type ListState = {
 };
 
 const initialState: ListState = {
-  lists: [],
+  lists: [
+    {
+      id: "1",
+      title: "Städlista",
+      items: [
+        {
+          title: "Damma",
+          description: "Damma",
+          status: "unchecked",
+        },
+        {
+          title: "Dammsuga",
+          description: "",
+          status: "unchecked",
+        },
+        {
+          title: "Städa kök",
+          description: "",
+          status: "unchecked",
+        },
+        {
+          title: "Städa toalett",
+          description: "",
+          status: "unchecked",
+        },
+        {
+          title: "Moppa",
+          description: "",
+          status: "unchecked",
+        },
+      ],
+    },
+    {
+      id: "2",
+      title: "Morgonrutiner",
+      items: [
+        {
+          title: "Mata katterna",
+          description: "",
+          status: "unchecked",
+        },
+        {
+          title: "Äta frukost",
+          description: "",
+          status: "unchecked",
+        },
+        {
+          title: "Ta mediciner",
+          description: "",
+          status: "unchecked",
+        },
+        {
+          title: "Plocka ur diskmaskinen",
+          description: "",
+          status: "unchecked",
+        },
+        {
+          title: "Borsta tänderna",
+          description: "",
+          status: "unchecked",
+        },
+      ],
+    },
+  ],
 };
 
 const listSlice = createSlice({
