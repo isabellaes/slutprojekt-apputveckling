@@ -1,59 +1,47 @@
 import { View, StyleSheet, ScrollView } from "react-native";
 import { FAB } from "react-native-paper";
-import { Surface, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 import { Checkbox } from "react-native-paper";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { useEffect, useState } from "react";
+
+type ListItem = {
+  title: string;
+  description: string;
+  deadline?: Date;
+  status: "checked" | "unchecked" | "indeterminate";
+};
+type List = {
+  id: string;
+  type?: "check" | "todo";
+  title: string;
+  items: ListItem[];
+};
 
 const Lists = () => {
+  const [lists, setLists] = useState<List[]>([]);
+  const data = useSelector<RootState>((state) => state.list.lists) as List[];
+
+  useEffect(() => {
+    if (data) setLists(data);
+  }, [data]);
+
   return (
     <View style={styles.container}>
       <Text>Mina listor</Text>
       <ScrollView>
-        <View style={styles.list}>
-          <Text>Checklista Städ</Text>
-          <View style={styles.listItem}>
-            <Text>Damma</Text>
-            <Checkbox status={"checked"} />
+        {lists.map((list) => (
+          <View style={styles.list} key={list.id}>
+            <Text>{list.title}</Text>
+            {list.items.map((item) => (
+              <View style={styles.listItem} key={item.title}>
+                <Text>{item.title}</Text>
+                <Checkbox status={item.status} />
+              </View>
+            ))}
           </View>
-          <View style={styles.listItem}>
-            <Text>Moppa</Text>
-            <Checkbox status={"checked"} />
-          </View>
-          <View style={styles.listItem}>
-            <Text>Städa kök</Text>
-            <Checkbox status={"checked"} />
-          </View>
-          <View style={styles.listItem}>
-            <Text>Städa toalett</Text>
-            <Checkbox status={"checked"} />
-          </View>
-          <View style={styles.listItem}>
-            <Text>Dammsuga</Text>
-            <Checkbox status={"checked"} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text>Checklista Morgonrutiner</Text>
-          <View style={styles.listItem}>
-            <Text>Mata katterna</Text>
-            <Checkbox status={"checked"} />
-          </View>
-          <View style={styles.listItem}>
-            <Text>Äta frukost</Text>
-            <Checkbox status={"checked"} />
-          </View>
-          <View style={styles.listItem}>
-            <Text>Ta mediciner</Text>
-            <Checkbox status={"checked"} />
-          </View>
-          <View style={styles.listItem}>
-            <Text>Plocka ur diskmaskinen</Text>
-            <Checkbox status={"checked"} />
-          </View>
-          <View style={styles.listItem}>
-            <Text>Borsta tänderna</Text>
-            <Checkbox status={"checked"} />
-          </View>
-        </View>
+        ))}
       </ScrollView>
       <FAB
         icon="plus"
