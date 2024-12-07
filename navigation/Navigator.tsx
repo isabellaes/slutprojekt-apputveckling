@@ -1,11 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
-import Home from "./screens/Home";
+import Home from "../screens/Home";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Settings from "./screens/Settings";
-import Planner from "./screens/Planner";
-import Lists from "./screens/Lists";
-import Moodtracker from "./screens/Moodtracker";
-import TimerScreen from "./screens/Timer";
+import Settings from "../screens/Settings";
+import Planner from "../screens/Planner";
+import Lists from "../screens/Lists";
+import Moodtracker from "../screens/Moodtracker";
+import TimerScreen from "../screens/Timer";
 
 export type RootStackParamList = {
   Home: undefined;

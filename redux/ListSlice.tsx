@@ -1,16 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-type ListItem = {
-  title: string;
-  description: string;
-  deadline?: Date;
-  status: "checked" | "unchecked" | "indeterminate";
-};
-type List = {
-  id: string;
-  type?: "check" | "todo";
-  title: string;
-  items: ListItem[];
-};
+import { List } from "../utils/Types";
 
 type ListState = {
   lists: List[];

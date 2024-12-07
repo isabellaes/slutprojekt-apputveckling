@@ -3,11 +3,8 @@ import { Calendar } from "react-native-calendars";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
-type Item = {
-  id: string;
-  title: string;
-  date: Date;
-};
+import { Item } from "../utils/Types";
+
 const Planner = () => {
   const [selectedDate, setSelectedDate] = useState<Item>();
   const [markedDates, setMarkedDates] = useState<{ [key: string]: any }>({});

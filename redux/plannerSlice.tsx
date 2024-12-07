@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-type Item = {
-  id: string;
-  title: string;
-  date: Date;
-};
+import { Item } from "../utils/Types";
 
 type plannerState = {
   items: Item[];
