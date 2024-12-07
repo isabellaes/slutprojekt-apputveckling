@@ -1,7 +1,29 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { Switch } from "react-native-paper";
+import {
+  changeHomeLists,
+  changeHomeMoodtracker,
+  changeHomePlanner,
+  changeNotifications,
+  changeTheme,
+  SettingsState,
+} from "../redux/SettingsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { useEffect, useState } from "react";
+import { RootState } from "../redux/store";
 
 const Settings = () => {
+  const [settings, setSettings] = useState<SettingsState>();
+  const dispatch = useDispatch<AppDispatch>();
+  const data = useSelector<RootState>(
+    (state) => state.settings
+  ) as SettingsState;
+
+  useEffect(() => {
+    setSettings(data);
+  });
+
   return (
     <View style={styles.container}>
       <Text>Inställningar</Text>
@@ -11,29 +33,54 @@ const Settings = () => {
           <Text>Hemskärm</Text>
           <View style={styles.switchBox}>
             <Text>Visa planner</Text>
-            <Switch />
+            <Switch
+              value={settings?.home.planner}
+              onValueChange={() => {
+                dispatch(changeHomePlanner(!settings?.home.planner));
+              }}
+            />
           </View>
           <View style={styles.switchBox}>
             <Text>Visa senaste lista</Text>
-            <Switch />
+            <Switch
+              value={settings?.home.lists}
+              onValueChange={() => {
+                dispatch(changeHomeLists(!settings?.home.lists));
+              }}
+            />
           </View>
           <View style={styles.switchBox}>
             <Text>Visa moodtracker</Text>
-            <Switch />
+            <Switch
+              value={settings?.home.moodtracker}
+              onValueChange={() => {
+                dispatch(changeHomeMoodtracker(!settings?.home.moodtracker));
+              }}
+            />
           </View>
         </View>
         <View style={styles.box}>
           <Text>Tema</Text>
           <View style={styles.switchBox}>
-            <Text>Light</Text>
-            <Switch />
+            <Text>Darkmode</Text>
+            <Switch
+              value={settings?.theme.dark}
+              onValueChange={() => {
+                dispatch(changeTheme(!settings?.theme.dark));
+              }}
+            />
           </View>
         </View>
         <View style={styles.box}>
           <Text>Notiser</Text>
           <View style={styles.switchBox}>
             <Text>Slå på notiser</Text>
-            <Switch />
+            <Switch
+              value={settings?.notifications}
+              onValueChange={() => {
+                dispatch(changeNotifications(!settings?.notifications));
+              }}
+            />
           </View>
         </View>
       </ScrollView>
