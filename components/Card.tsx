@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { useTheme, Text } from "react-native-paper";
 
 type CardProps = {
   title: string;
@@ -7,8 +8,11 @@ type CardProps = {
 };
 
 const Card = (props: CardProps) => {
+  const theme = useTheme();
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Text>{props.title}</Text>
       <Text>{props.time}</Text>
       <Text>{props.description}</Text>

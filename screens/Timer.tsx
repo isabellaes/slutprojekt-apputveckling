@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet } from "react-native";
-import { Button, Snackbar } from "react-native-paper";
+import { View, StyleSheet } from "react-native";
+import { Button, Snackbar, useTheme, Text } from "react-native-paper";
 import useTimer from "easytimer-react-hook";
 import { useEffect, useState } from "react";
 
@@ -24,6 +24,8 @@ const TimerScreen = () => {
 
   const [visible, setVisible] = useState(false);
 
+  const theme = useTheme();
+
   useEffect(() => {
     if (
       timer.getTimeValues().minutes == 0 &&
@@ -33,7 +35,9 @@ const TimerScreen = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Text>Timer</Text>
       <Text>FOKUS TIMER</Text>
       <View style={styles.circle}>
@@ -76,7 +80,6 @@ const TimerScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightgreen",
     alignItems: "center",
     padding: 10,
     gap: 10,

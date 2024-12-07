@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import Home from "../screens/Home";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Settings from "../screens/Settings";
@@ -7,6 +7,7 @@ import Lists from "../screens/Lists";
 import Moodtracker from "../screens/Moodtracker";
 import TimerScreen from "../screens/Timer";
 import CreateNewList from "../screens/CreateNewList";
+import { useTheme, adaptNavigationTheme } from "react-native-paper";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -21,8 +22,16 @@ export type RootStackParamList = {
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
 const Navigator = () => {
+  const theme = useTheme();
+  const { LightTheme } = adaptNavigationTheme({
+    reactNavigationLight: DefaultTheme,
+  });
+  const { DarkTheme } = adaptNavigationTheme({
+    reactNavigationDark: DefaultTheme,
+  });
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme.dark ? DarkTheme : LightTheme}>
       <Drawer.Navigator screenOptions={{}}>
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Settings" component={Settings} />

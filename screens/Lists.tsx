@@ -1,5 +1,5 @@
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Checkbox, Text } from "react-native-paper";
+import { Checkbox, Text, useTheme } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
@@ -8,13 +8,16 @@ import { List } from "../utils/Types";
 const Lists = () => {
   const [lists, setLists] = useState<List[]>([]);
   const data = useSelector<RootState>((state) => state.list.lists) as List[];
+  const theme = useTheme();
 
   useEffect(() => {
     if (data) setLists(data);
   }, [data]);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Text>Mina listor</Text>
 
       <ScrollView>
@@ -37,7 +40,6 @@ const Lists = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightgreen",
     alignItems: "center",
     padding: 10,
     gap: 10,
@@ -56,7 +58,6 @@ const styles = StyleSheet.create({
   },
   list: {
     margin: 5,
-    backgroundColor: "lightgreen",
     alignItems: "center",
     padding: 10,
     borderBlockColor: "black",
@@ -64,12 +65,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "black",
     borderWidth: 2,
-  },
-  modalContent: {
-    justifyContent: "center",
-    backgroundColor: "white",
-    padding: 10,
-    gap: 2,
   },
 });
 

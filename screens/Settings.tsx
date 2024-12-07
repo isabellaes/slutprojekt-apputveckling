@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { Switch } from "react-native-paper";
+import { View, StyleSheet, ScrollView } from "react-native";
+import { Switch, Text, useTheme } from "react-native-paper";
 import {
   changeHomeLists,
   changeHomeMoodtracker,
@@ -24,8 +24,12 @@ const Settings = () => {
     setSettings(data);
   });
 
+  const theme = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Text>Inställningar</Text>
 
       <ScrollView contentContainerStyle={{ gap: 10 }}>
@@ -91,7 +95,6 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightgreen",
     alignItems: "center",
     padding: 10,
     gap: 10,
@@ -100,7 +103,6 @@ const styles = StyleSheet.create({
     minHeight: 100,
     minWidth: 300,
     margin: 5,
-    backgroundColor: "lightgreen",
     alignItems: "center",
     padding: 10,
     borderBlockColor: "black",

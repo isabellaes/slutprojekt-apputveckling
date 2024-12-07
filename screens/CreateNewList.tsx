@@ -1,5 +1,5 @@
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput, useTheme } from "react-native-paper";
 import { Text } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
@@ -20,6 +20,7 @@ const CreateNewList = () => {
   const [title, setTitle] = useState("");
 
   const dispatch = useDispatch<AppDispatch>();
+    const theme = useTheme();
 
   function updateList(title: string) {
     const newItem: ListItem = {
@@ -51,7 +52,7 @@ const CreateNewList = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <Text variant="titleMedium">Skapa ny lista</Text>
       <ScrollView>
         <TextInput
@@ -73,7 +74,6 @@ const CreateNewList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightgreen",
     alignItems: "center",
     padding: 10,
     gap: 10,
