@@ -1,7 +1,5 @@
 import { View, StyleSheet, ScrollView } from "react-native";
-import { FAB } from "react-native-paper";
-import { Text } from "react-native-paper";
-import { Checkbox } from "react-native-paper";
+import { Checkbox, Text } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
@@ -18,6 +16,7 @@ const Lists = () => {
   return (
     <View style={styles.container}>
       <Text>Mina listor</Text>
+
       <ScrollView>
         {lists.map((list) => (
           <View style={styles.list} key={list.id}>
@@ -31,12 +30,6 @@ const Lists = () => {
           </View>
         ))}
       </ScrollView>
-      <FAB
-        icon="plus"
-        style={styles.fab}
-        color="green"
-        onPress={() => console.log("Pressed")}
-      />
     </View>
   );
 };
@@ -71,6 +64,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "black",
     borderWidth: 2,
+  },
+  modalContent: {
+    justifyContent: "center",
+    backgroundColor: "white",
+    padding: 10,
+    gap: 2,
   },
 });
 

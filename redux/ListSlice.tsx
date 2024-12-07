@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { List } from "../utils/Types";
 
 type ListState = {
@@ -75,9 +75,13 @@ const initialState: ListState = {
 const listSlice = createSlice({
   name: "list",
   initialState,
-  reducers: {},
+  reducers: {
+    addList: (state, action: PayloadAction<List>) => {
+      state.lists.push(action.payload);
+    },
+  },
 });
 
-export const {} = listSlice.actions;
+export const { addList } = listSlice.actions;
 
 export default listSlice.reducer;
