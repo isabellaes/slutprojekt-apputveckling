@@ -10,7 +10,7 @@ const initialState: plannerState = {
     {
       id: "1",
       title: "Hämta medicin",
-      date: new Date("2024-12-8T10:00:00"),
+      date: new Date("2024-12-08T10:00:00"),
     },
     {
       id: "2",

@@ -1,14 +1,16 @@
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Checkbox, Text, useTheme } from "react-native-paper";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
-import { List } from "../utils/Types";
+import { List, ListItem } from "../utils/Types";
+import { updateStatusOnItem } from "../redux/ListSlice";
 
 const Lists = () => {
   const [lists, setLists] = useState<List[]>([]);
   const data = useSelector<RootState>((state) => state.list.lists) as List[];
   const theme = useTheme();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (data) setLists(data);
@@ -27,7 +29,17 @@ const Lists = () => {
             {list.items.map((item) => (
               <View style={styles.listItem} key={item.title}>
                 <Text>{item.title}</Text>
-                <Checkbox status={item.status} />
+                <Checkbox
+                  status={item.status}
+                  onPress={() => {
+                    const status: "checked" | "unchecked" | "indeterminate" =
+                      item.status === "checked" ? "unchecked" : "checked";
+                    const newItem: ListItem = { ...item, status: status };
+                    dispatch(
+                      updateStatusOnItem({ id: list.id, item: newItem })
+                    );
+                  }}
+                />
               </View>
             ))}
           </View>

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { List } from "../utils/Types";
+import { List, ListItem } from "../utils/Types";
 
 type ListState = {
   lists: List[];
@@ -79,9 +79,23 @@ const listSlice = createSlice({
     addList: (state, action: PayloadAction<List>) => {
       state.lists.push(action.payload);
     },
+    updateStatusOnItem: (
+      state,
+      action: PayloadAction<{ id: string; item: ListItem }>
+    ) => {
+      const { id, item } = action.payload;
+
+      const list = state.lists.find((l) => l.id === id);
+      if (list) {
+        const listItem = list.items.find((i) => i.title === item.title);
+        if (listItem) {
+          listItem.status = item.status;
+        }
+      }
+    },
   },
 });
 
-export const { addList } = listSlice.actions;
+export const { addList, updateStatusOnItem } = listSlice.actions;
 
 export default listSlice.reducer;
