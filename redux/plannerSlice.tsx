@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Item } from "../utils/Types";
 
 type plannerState = {
@@ -28,9 +28,13 @@ const initialState: plannerState = {
 const plannerSlice = createSlice({
   name: "planner",
   initialState,
-  reducers: {},
+  reducers: {
+    addItem: (state, action: PayloadAction<Item>) => {
+      state.items.push(action.payload);
+    },
+  },
 });
 
-export const {} = plannerSlice.actions;
+export const { addItem } = plannerSlice.actions;
 
 export default plannerSlice.reducer;

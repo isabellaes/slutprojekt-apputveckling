@@ -5,6 +5,7 @@ import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import { Item } from "../utils/Types";
 import { useTheme, Text } from "react-native-paper";
+import { DateTimePickerExample } from "../components/DateTimePicker";
 
 const Planner = () => {
   const [selectedDate, setSelectedDate] = useState<Item>();
@@ -48,7 +49,7 @@ const Planner = () => {
           backgroundColor: theme.colors.background,
           calendarBackground: theme.colors.background,
           textSectionTitleColor: theme.colors.primary,
-          selectedDayBackgroundColor: theme.colors.outline,
+          selectedDayBackgroundColor: "blue",
           selectedDayTextColor: theme.colors.primary,
           todayTextColor: theme.colors.secondary,
           dayTextColor: theme.colors.primary,
@@ -59,10 +60,12 @@ const Planner = () => {
         }}
       />
 
-      <View>
+      <View style={{ width: "100%", alignItems: "center", padding: 15 }}>
         <Text>{selectedDate?.date.split("T")[0]}</Text>
         <Text>{selectedDate?.title}</Text>
       </View>
+
+      <DateTimePickerExample />
     </View>
   );
 };
