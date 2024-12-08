@@ -6,7 +6,6 @@ import Planner from "../screens/Planner";
 import Lists from "../screens/Lists";
 import Moodtracker from "../screens/Moodtracker";
 import TimerScreen from "../screens/Timer";
-import CreateNewList from "../screens/CreateNewList";
 import { useTheme, adaptNavigationTheme } from "react-native-paper";
 
 export type RootStackParamList = {
@@ -37,7 +36,6 @@ const Navigator = () => {
         <Drawer.Screen name="Settings" component={Settings} />
         <Drawer.Screen name="Planner" component={Planner} />
         <Drawer.Screen name="Lists" component={Lists} />
-        <Drawer.Screen name="CreateNewList" component={CreateNewList} />
         <Drawer.Screen name="Moodtracker" component={Moodtracker} />
         <Drawer.Screen name="Timer" component={TimerScreen} />
       </Drawer.Navigator>

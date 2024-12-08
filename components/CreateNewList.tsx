@@ -1,6 +1,13 @@
-import { View, StyleSheet, ScrollView } from "react-native";
-import { Button, TextInput, useTheme } from "react-native-paper";
-import { Text } from "react-native-paper";
+import {
+  Text,
+  Button,
+  Modal,
+  Portal,
+  useTheme,
+  TextInput,
+  IconButton,
+} from "react-native-paper";
+import { View, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { useState } from "react";
@@ -11,7 +18,7 @@ import { generateRandomId } from "../utils/getRandomId";
 const CreateNewList = () => {
   const [items, setItems] = useState([
     <TextInput
-      style={{ width: 200, marginBottom: 5 }}
+      style={{ marginBottom: 5 }}
       label="List item"
       onChangeText={(text) => updateList(text)}
       key={0}
@@ -19,6 +26,7 @@ const CreateNewList = () => {
   ]);
   const [list, setList] = useState<ListItem[]>([]);
   const [title, setTitle] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
@@ -36,7 +44,7 @@ const CreateNewList = () => {
     setItems((prevItems) => [
       ...prevItems,
       <TextInput
-        style={{ width: 200, marginBottom: 5 }}
+        style={{ marginBottom: 5 }}
         label="List item"
         key={prevItems.length}
         onChangeText={(text) => updateList(text)}
@@ -54,24 +62,43 @@ const CreateNewList = () => {
   }
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
-      <Text variant="titleMedium">Skapa ny lista</Text>
-      <ScrollView>
-        <TextInput
-          style={{ width: 200, marginBottom: 5 }}
-          label={"Titel Lista"}
-          onChangeText={(text) => setTitle(text)}
-        />
-        {items}
+    <SafeAreaView>
+      <Portal>
+        <Modal
+          contentContainerStyle={{
+            flex: 1,
+          }}
+          visible={visible}
+          onDismiss={() => setVisible(false)}
+        >
+          <View
+            style={{
+              padding: 10,
+              backgroundColor: theme.colors.background,
+              gap: 10,
+            }}
+          >
+            <IconButton icon={"close"} onPress={() => setVisible(false)} />
 
-        <Button onPress={addListItem}>Add item</Button>
-      </ScrollView>
-      <Button mode="contained" onPress={createList}>
-        Skapa lista
-      </Button>
-    </View>
+            <Text variant="titleMedium">Skapa ny lista</Text>
+            <ScrollView>
+              <TextInput
+                style={{ marginBottom: 5 }}
+                label={"Titel Lista"}
+                onChangeText={(text) => setTitle(text)}
+              />
+              {items}
+
+              <Button onPress={addListItem}>Add item</Button>
+            </ScrollView>
+            <Button mode="contained" onPress={createList}>
+              Skapa lista
+            </Button>
+          </View>
+        </Modal>
+      </Portal>
+      <Button onPress={() => setVisible(true)}>Skapa ny lista</Button>
+    </SafeAreaView>
   );
 };
 

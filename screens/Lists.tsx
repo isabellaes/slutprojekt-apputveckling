@@ -1,10 +1,11 @@
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Checkbox, Text, useTheme } from "react-native-paper";
+import { Checkbox, Text, useTheme, FAB } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
 import { List, ListItem } from "../utils/Types";
 import { updateStatusOnItem } from "../redux/ListSlice";
+import CreateNewList from "../components/CreateNewList";
 
 const Lists = () => {
   const [lists, setLists] = useState<List[]>([]);
@@ -45,6 +46,7 @@ const Lists = () => {
           </View>
         ))}
       </ScrollView>
+      <CreateNewList></CreateNewList>
     </View>
   );
 };
