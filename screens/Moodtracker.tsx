@@ -76,7 +76,7 @@ const Moodtracker = () => {
       <View style={styles.statisticsContainer}>
         <Text>Statistik</Text>
         {moodData.map((m) => (
-          <View key={m.id}>
+          <View style={styles.statisticsContainer} key={m.id}>
             <Text>{m.date.split("T")[0]}</Text>
             {getImageAvatar(m.img)}
           </View>
