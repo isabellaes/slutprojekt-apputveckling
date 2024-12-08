@@ -14,6 +14,7 @@ import { Item } from "../utils/Types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { addItem } from "../redux/plannerSlice";
+import { generateRandomId } from "../utils/getRandomId";
 
 export const DateTimePickerExample = () => {
   const [date, setDate] = useState(new Date());
@@ -24,7 +25,7 @@ export const DateTimePickerExample = () => {
 
   function saveActivity() {
     const item: Item = {
-      id: "124lsdl",
+      id: generateRandomId(),
       title: title,
       date: date.toISOString(),
     };

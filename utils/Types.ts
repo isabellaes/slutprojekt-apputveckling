@@ -16,3 +16,9 @@ export type Item = {
   title: string;
   date: string;
 };
+
+export type Mood = {
+  id: string;
+  img: string;
+  date: string;
+};

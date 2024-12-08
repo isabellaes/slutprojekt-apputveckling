@@ -6,6 +6,7 @@ import { AppDispatch } from "../redux/store";
 import { useState } from "react";
 import { List, ListItem } from "../utils/Types";
 import { addList } from "../redux/ListSlice";
+import { generateRandomId } from "../utils/getRandomId";
 
 const CreateNewList = () => {
   const [items, setItems] = useState([
@@ -20,7 +21,7 @@ const CreateNewList = () => {
   const [title, setTitle] = useState("");
 
   const dispatch = useDispatch<AppDispatch>();
-    const theme = useTheme();
+  const theme = useTheme();
 
   function updateList(title: string) {
     const newItem: ListItem = {
@@ -44,7 +45,7 @@ const CreateNewList = () => {
 
   function createList() {
     const newList: List = {
-      id: "",
+      id: generateRandomId(),
       title: title,
       items: list,
     };
@@ -52,7 +53,9 @@ const CreateNewList = () => {
   }
 
   return (
-    <View style={[styles.container, {backgroundColor: theme.colors.background}]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Text variant="titleMedium">Skapa ny lista</Text>
       <ScrollView>
         <TextInput
