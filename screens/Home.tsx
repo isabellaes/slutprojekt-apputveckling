@@ -28,9 +28,7 @@ const Home = () => {
   function getActivityToday() {
     return (
       items?.find(
-        (i) =>
-          i.date.toISOString().split("T")[0] ===
-          date.toISOString().split("T")[0]
+        (i) => i.date.split("T")[0] === date.toISOString().split("T")[0]
       )?.title || "Inga aktiviteter idag"
     );
   }
@@ -40,9 +38,7 @@ const Home = () => {
     tomorrow.setDate(date.getDate() + 1);
     return (
       items?.find(
-        (i) =>
-          i.date.toISOString().split("T")[0] ===
-          tomorrow.toISOString().split("T")[0]
+        (i) => i.date.split("T")[0] === tomorrow.toISOString().split("T")[0]
       )?.title || "Inga aktiviteter imorgon"
     );
   }

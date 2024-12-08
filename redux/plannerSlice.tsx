@@ -10,17 +10,17 @@ const initialState: plannerState = {
     {
       id: "1",
       title: "Hämta medicin",
-      date: new Date("2024-12-08T10:00:00"),
+      date: new Date("2024-12-08T10:00:00").toISOString(),
     },
     {
       id: "2",
       title: "Jobb",
-      date: new Date("2024-12-12T10:00:00"),
+      date: new Date("2024-12-12T10:00:00").toISOString(),
     },
     {
       id: "3",
       title: "Möte",
-      date: new Date("2024-12-17T10:00:00"),
+      date: new Date("2024-12-17T10:00:00").toISOString(),
     },
   ],
 };

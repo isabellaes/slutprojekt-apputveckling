@@ -19,7 +19,7 @@ const initialState: SettingsState = {
     lists: true,
   },
   theme: {
-    dark: false,
+    dark: true,
   },
   notifications: false,
 };

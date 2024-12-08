@@ -15,9 +15,7 @@ const Planner = () => {
 
   function onSelectDay(day: any) {
     if (data && data.length > 0) {
-      const item = data.find(
-        (i) => i.date.toISOString().split("T")[0] === day.dateString
-      );
+      const item = data.find((i) => i.date.split("T")[0] === day.dateString);
       if (item) {
         setSelectedDate(item);
       }
@@ -29,7 +27,7 @@ const Planner = () => {
       const newMarkedDates: { [key: string]: any } = {};
 
       data.forEach((item) => {
-        const dateString = item.date.toISOString().split("T")[0];
+        const dateString = item.date.split("T")[0];
         newMarkedDates[dateString] = {
           marked: true,
           dotColor: "blue",
@@ -46,7 +44,15 @@ const Planner = () => {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <Calendar
-        theme={theme}
+        theme={{
+          backgroundColor: theme.colors.background,
+          calendarBackground: theme.colors.background,
+          textSectionTitleColor: theme.colors.primary,
+          selectedDayBackgroundColor: theme.colors.outline,
+          selectedDayTextColor: theme.colors.primary,
+          todayTextColor: theme.colors.secondary,
+          dayTextColor: theme.colors.primary,
+        }}
         markedDates={markedDates}
         onDayPress={(day: any) => {
           onSelectDay(day);
@@ -54,7 +60,7 @@ const Planner = () => {
       />
 
       <View>
-        <Text>{selectedDate?.date.toISOString().split("T")[0]}</Text>
+        <Text>{selectedDate?.date.split("T")[0]}</Text>
         <Text>{selectedDate?.title}</Text>
       </View>
     </View>
@@ -64,9 +70,6 @@ const Planner = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    padding: 10,
-    gap: 10,
   },
 });
 

@@ -14,5 +14,5 @@ export type List = {
 export type Item = {
   id: string;
   title: string;
-  date: Date;
+  date: string;
 };
