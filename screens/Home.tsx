@@ -7,12 +7,17 @@ import { SettingsState } from "../redux/SettingsSlice";
 import { useTheme, Text } from "react-native-paper";
 
 const Home = () => {
-  const [items, setItems] = useState<Item[]>();
+  const [itemsToday, setItemsToday] = useState<Item[]>();
+  const [itemsTomorrow, setItemsTomorrow] = useState<Item[]>();
   const [lists, setLists] = useState<List[]>();
   const [settings, setSettings] = useState<SettingsState>();
 
   const date = new Date();
+  const tomorrows = new Date(date);
+  tomorrows.setDate(date.getDate() + 1);
+
   const data = useSelector<RootState>((state) => state.planner.items) as Item[];
+
   const dataLists = useSelector<RootState>(
     (state) => state.list.lists
   ) as List[];
@@ -23,29 +28,18 @@ const Home = () => {
 
   useEffect(() => {
     setSettings(settingState);
-  });
-
-  function getActivityToday() {
-    return (
-      items?.find(
-        (i) => i.date.split("T")[0] === date.toISOString().split("T")[0]
-      )?.title || "Inga aktiviteter idag"
-    );
-  }
-
-  function getActivityTomorrow() {
-    const tomorrow = new Date(date);
-    tomorrow.setDate(date.getDate() + 1);
-    return (
-      items?.find(
-        (i) => i.date.split("T")[0] === tomorrow.toISOString().split("T")[0]
-      )?.title || "Inga aktiviteter imorgon"
-    );
-  }
+  }, [settingState]);
 
   useEffect(() => {
     if (data) {
-      setItems(data);
+      const todaysitem = data.filter(
+        (i) => i.date.split("T")[0] === date.toISOString().split("T")[0]
+      );
+      const tommorowsItem = data.filter(
+        (i) => i.date.split("T")[0] === tomorrows.toISOString().split("T")[0]
+      );
+      setItemsToday(todaysitem);
+      setItemsTomorrow(tommorowsItem);
     }
   }, [data]);
 
@@ -54,6 +48,7 @@ const Home = () => {
       setLists(dataLists);
     }
   }, [dataLists]);
+
   const theme = useTheme();
   return (
     <View
@@ -66,11 +61,19 @@ const Home = () => {
           <>
             <View style={styles.box}>
               <Text>Idag</Text>
-              <Text>{getActivityToday()}</Text>
+              {itemsToday?.map((i) => (
+                <Text key={i.id}>
+                  {i?.title} {i?.date.split("T")[1].slice(0, 5)}
+                </Text>
+              ))}
             </View>
             <View style={styles.box}>
               <Text>Imorgon</Text>
-              <Text>{getActivityTomorrow()}</Text>
+              {itemsTomorrow?.map((i) => (
+                <Text key={i.id}>
+                  {i?.title} {i?.date.split("T")[1].slice(0, 5)}
+                </Text>
+              ))}
             </View>
           </>
         ) : (
@@ -78,7 +81,7 @@ const Home = () => {
         )}
         {settings?.home.lists ? (
           <View style={styles.box}>
-            <Text>Listor</Text>
+            <Text>Mina Listor</Text>
             {lists?.map((list) => (
               <Text key={list.id}>{list.title}</Text>
             ))}

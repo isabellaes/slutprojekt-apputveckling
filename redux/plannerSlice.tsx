@@ -15,7 +15,7 @@ const initialState: plannerState = {
     {
       id: "2",
       title: "Jobb",
-      date: new Date("2024-12-12T10:00:00").toISOString(),
+      date: new Date("2024-12-09T10:00:00").toISOString(),
     },
     {
       id: "3",

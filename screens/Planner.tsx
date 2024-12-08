@@ -8,7 +8,7 @@ import { useTheme, Text } from "react-native-paper";
 import { DateTimePickerExample } from "../components/DateTimePicker";
 
 const Planner = () => {
-  const [selectedDate, setSelectedDate] = useState<Item>();
+  const [selectedDate, setSelectedDate] = useState<Item[]>([]);
   const [markedDates, setMarkedDates] = useState<{ [key: string]: any }>({});
   const data = useSelector<RootState>((state) => state.planner.items) as Item[];
 
@@ -16,7 +16,7 @@ const Planner = () => {
 
   function onSelectDay(day: any) {
     if (data && data.length > 0) {
-      const item = data.find((i) => i.date.split("T")[0] === day.dateString);
+      const item = data.filter((i) => i.date.split("T")[0] === day.dateString);
       if (item) {
         setSelectedDate(item);
       }
@@ -59,11 +59,15 @@ const Planner = () => {
           onSelectDay(day);
         }}
       />
-
-      <View style={{ width: "100%", alignItems: "center", padding: 15 }}>
-        <Text>{selectedDate?.date.split("T")[0]}</Text>
-        <Text>{selectedDate?.title}</Text>
-      </View>
+      {selectedDate?.map((i) => (
+        <View
+          key={i.id}
+          style={{ width: "100%", alignItems: "center", padding: 15 }}
+        >
+          <Text>{i?.date.split("T")[0]}</Text>
+          <Text>{i?.title}</Text>
+        </View>
+      ))}
 
       <DateTimePickerExample />
     </View>
