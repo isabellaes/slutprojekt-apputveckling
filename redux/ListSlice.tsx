@@ -93,9 +93,12 @@ const listSlice = createSlice({
         }
       }
     },
+    deleteList: (state, action: PayloadAction<{ id: string }>) => {
+      state.lists = state.lists.filter((list) => list.id !== action.payload.id);
+    },
   },
 });
 
-export const { addList, updateStatusOnItem } = listSlice.actions;
+export const { addList, updateStatusOnItem, deleteList } = listSlice.actions;
 
 export default listSlice.reducer;

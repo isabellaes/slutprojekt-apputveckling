@@ -1,10 +1,10 @@
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Checkbox, Text, useTheme, FAB } from "react-native-paper";
+import { Checkbox, Text, useTheme, FAB, Button } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
 import { List, ListItem } from "../utils/Types";
-import { updateStatusOnItem } from "../redux/ListSlice";
+import { updateStatusOnItem, deleteList } from "../redux/ListSlice";
 import CreateNewList from "../components/CreateNewList";
 
 const Lists = () => {
@@ -43,6 +43,9 @@ const Lists = () => {
                 />
               </View>
             ))}
+            <Button onPress={() => dispatch(deleteList({ id: list.id }))}>
+              Radera lista
+            </Button>
           </View>
         ))}
       </ScrollView>
