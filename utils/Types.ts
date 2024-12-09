@@ -21,4 +21,5 @@ export type Mood = {
   id: string;
   img: string;
   date: string;
+  notes: string;
 };

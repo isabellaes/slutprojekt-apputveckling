@@ -54,34 +54,47 @@ const Home = () => {
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <Text>Välkommen!</Text>
+      <Text variant="titleLarge">Välkommen!</Text>
       <Text>{date.toISOString().split("T")[0]}</Text>
       <ScrollView contentContainerStyle={{ gap: 10 }}>
         {settings?.home.planner ? (
           <>
-            <View style={styles.box}>
-              <Text>Idag</Text>
-              {itemsToday?.map((i) => (
-                <Text key={i.id}>
-                  {i?.title} {i?.date.split("T")[1].slice(0, 5)}
-                </Text>
-              ))}
+            <View style={[styles.box, { borderColor: theme.colors.primary }]}>
+              <Text variant="titleMedium">Idag</Text>
+
+              {itemsToday && itemsToday.length > 0 ? (
+                <>
+                  {itemsToday?.map((i) => (
+                    <Text key={i.id}>
+                      {i?.title} {i?.date.split("T")[1].slice(0, 5)}
+                    </Text>
+                  ))}
+                </>
+              ) : (
+                <Text>Inga aktiviteter idag</Text>
+              )}
             </View>
-            <View style={styles.box}>
-              <Text>Imorgon</Text>
-              {itemsTomorrow?.map((i) => (
-                <Text key={i.id}>
-                  {i?.title} {i?.date.split("T")[1].slice(0, 5)}
-                </Text>
-              ))}
+            <View style={[styles.box, { borderColor: theme.colors.primary }]}>
+              <Text variant="titleMedium">Imorgon</Text>
+              {itemsTomorrow && itemsTomorrow.length > 0 ? (
+                <>
+                  {itemsTomorrow?.map((i) => (
+                    <Text key={i.id}>
+                      {i?.title} {i?.date.split("T")[1].slice(0, 5)}
+                    </Text>
+                  ))}
+                </>
+              ) : (
+                <Text>Inga aktiviteter imorgon</Text>
+              )}
             </View>
           </>
         ) : (
           <></>
         )}
         {settings?.home.lists ? (
-          <View style={styles.box}>
-            <Text>Mina Listor</Text>
+          <View style={[styles.box, { borderColor: theme.colors.primary }]}>
+            <Text variant="titleMedium">Mina Listor</Text>
             {lists?.map((list) => (
               <Text key={list.id}>{list.title}</Text>
             ))}
@@ -107,10 +120,8 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: "center",
     padding: 10,
-    borderBlockColor: "black",
     borderCurve: "circular",
     borderRadius: 5,
-    borderColor: "black",
     borderWidth: 2,
   },
 });

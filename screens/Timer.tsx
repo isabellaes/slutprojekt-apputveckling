@@ -38,28 +38,19 @@ const TimerScreen = () => {
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <Text>Timer</Text>
-      <Text>FOKUS TIMER</Text>
+      <Text variant="titleMedium">FOKUS TIMER</Text>
       <View style={styles.circle}>
         <Text>{timer.getTimeValues().toString()}</Text>
       </View>
-      <Button mode="contained" onPress={() => timer.start()}>
-        Starta
-      </Button>
-      <Button mode="contained" onPress={() => timer.stop()}>
-        Stoppa
-      </Button>
+      <Button onPress={() => timer.start()}>Starta</Button>
+      <Button onPress={() => timer.stop()}>Stoppa</Button>
 
-      <Text>PAUS TIMER</Text>
+      <Text variant="titleMedium">PAUS TIMER</Text>
       <View style={styles.circle}>
         <Text>{timer2.getTimeValues().toString()}</Text>
       </View>
-      <Button mode="contained" onPress={() => timer2.start()}>
-        Starta
-      </Button>
-      <Button mode="contained" onPress={() => timer2.stop()}>
-        Stoppa
-      </Button>
+      <Button onPress={() => timer2.start()}>Starta</Button>
+      <Button onPress={() => timer2.stop()}>Stoppa</Button>
 
       <Snackbar
         visible={visible}

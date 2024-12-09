@@ -33,7 +33,7 @@ const Settings = () => {
       <Text>Inställningar</Text>
 
       <ScrollView contentContainerStyle={{ gap: 10 }}>
-        <View style={styles.box}>
+        <View style={[styles.box, { borderColor: theme.colors.primary }]}>
           <Text>Hemskärm</Text>
           <View style={styles.switchBox}>
             <Text>Visa planner</Text>
@@ -63,7 +63,7 @@ const Settings = () => {
             />
           </View>
         </View>
-        <View style={styles.box}>
+        <View style={[styles.box, { borderColor: theme.colors.primary }]}>
           <Text>Tema</Text>
           <View style={styles.switchBox}>
             <Text>Darkmode</Text>
@@ -75,7 +75,7 @@ const Settings = () => {
             />
           </View>
         </View>
-        <View style={styles.box}>
+        <View style={[styles.box, { borderColor: theme.colors.primary }]}>
           <Text>Notiser</Text>
           <View style={styles.switchBox}>
             <Text>Slå på notiser</Text>

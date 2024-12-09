@@ -21,12 +21,15 @@ const Lists = () => {
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <Text>Mina listor</Text>
+      <Text variant="titleLarge">Mina listor</Text>
 
       <ScrollView>
         {lists.map((list) => (
-          <View style={styles.list} key={list.id}>
-            <Text>{list.title}</Text>
+          <View
+            style={[styles.list, { borderColor: theme.colors.primary }]}
+            key={list.id}
+          >
+            <Text variant="titleMedium">{list.title}</Text>
             {list.items.map((item) => (
               <View style={styles.listItem} key={item.title}>
                 <Text>{item.title}</Text>
@@ -80,7 +83,6 @@ const styles = StyleSheet.create({
     borderBlockColor: "black",
     borderCurve: "circular",
     borderRadius: 5,
-    borderColor: "black",
     borderWidth: 2,
   },
 });
