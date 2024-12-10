@@ -1,18 +1,16 @@
-import { View, StyleSheet, Pressable, Image } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { useTheme, Text, Avatar, TextInput, Button } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
-import { Mood } from "../utils/Types";
+import { DTOMood, Mood } from "../utils/Types";
 import mapImages from "../utils/imageMapper";
-import { addMood } from "../redux/MoodSlice";
-import { generateRandomId } from "../utils/getRandomId";
+import { fetchPostMood } from "../redux/MoodSlice";
 import MoodAvatar from "../components/MoodAvatar";
 
 const Moodtracker = () => {
   const [moodData, setMoodData] = useState<Mood[]>([]);
-  const [todayMood, setTodayMood] = useState<Mood>({
-    id: "",
+  const [todayMood, setTodayMood] = useState<DTOMood>({
     img: "",
     notes: "",
     date: "",
@@ -46,8 +44,7 @@ const Moodtracker = () => {
 
   function registerTodaysMood() {
     dispatch(
-      addMood({
-        id: generateRandomId(),
+      fetchPostMood({
         date: today.toISOString(),
         img: todayMood.img,
         notes: todayMood.notes,
@@ -86,7 +83,7 @@ const Moodtracker = () => {
       <View style={styles.statisticsContainer}>
         <Text variant="titleLarge">Statistik</Text>
         {moodData.map((m) => (
-          <View style={styles.statisticsContainer} key={m.id}>
+          <View style={styles.statisticsContainer} key={m._id}>
             <Text>{m.date.split("T")[0]}</Text>
             {getImageAvatar(m.img)}
             <Text>{m.notes}</Text>

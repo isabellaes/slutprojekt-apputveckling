@@ -5,20 +5,35 @@ export type ListItem = {
   status: "checked" | "unchecked" | "indeterminate";
 };
 export type List = {
-  id: string;
-  type?: "check" | "todo";
+  _id: string;
+  title: string;
+  items: ListItem[];
+};
+
+export type DTOList = {
   title: string;
   items: ListItem[];
 };
 
 export type Item = {
-  id: string;
+  _id: string;
+  title: string;
+  date: string;
+};
+
+export type DTOItem = {
   title: string;
   date: string;
 };
 
 export type Mood = {
-  id: string;
+  _id: string;
+  img: string;
+  date: string;
+  notes: string;
+};
+
+export type DTOMood = {
   img: string;
   date: string;
   notes: string;

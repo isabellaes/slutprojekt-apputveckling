@@ -11,9 +11,8 @@ import { View, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { useState } from "react";
-import { List, ListItem } from "../utils/Types";
-import { addList } from "../redux/ListSlice";
-import { generateRandomId } from "../utils/getRandomId";
+import { DTOList, ListItem } from "../utils/Types";
+import { fetchPostList } from "../redux/ListSlice";
 
 const CreateNewList = () => {
   const [items, setItems] = useState([
@@ -53,12 +52,11 @@ const CreateNewList = () => {
   }
 
   function createList() {
-    const newList: List = {
-      id: generateRandomId(),
+    const newList: DTOList = {
       title: title,
       items: list,
     };
-    dispatch(addList(newList));
+    dispatch(fetchPostList(newList));
   }
 
   return (

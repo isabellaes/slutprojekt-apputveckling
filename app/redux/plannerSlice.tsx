@@ -1,29 +1,40 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Item } from "../utils/Types";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Item, DTOItem } from "../utils/Types";
+import { getItems, postItem } from "../utils/api";
 
 type plannerState = {
   items: Item[];
 };
 
 const initialState: plannerState = {
-  items: [
-    {
-      id: "1",
-      title: "Hämta medicin",
-      date: new Date("2024-12-08T10:00:00").toISOString(),
-    },
-    {
-      id: "2",
-      title: "Jobb",
-      date: new Date("2024-12-09T10:00:00").toISOString(),
-    },
-    {
-      id: "3",
-      title: "Möte",
-      date: new Date("2024-12-17T10:00:00").toISOString(),
-    },
-  ],
+  items: [],
 };
+
+export const fetchItems = createAsyncThunk<
+  Item[],
+  void,
+  { rejectValue: string }
+>("item/fetchItems", async (_, { rejectWithValue }) => {
+  try {
+    const response = await getItems();
+    return response;
+  } catch (error) {
+    return rejectWithValue("Something went wrong");
+  }
+});
+
+export const fetchPostItem = createAsyncThunk<
+  Item,
+  DTOItem,
+  { rejectValue: string }
+>("item/fetchPostItem", async (data, { rejectWithValue }) => {
+  try {
+    const response = await postItem(data);
+    return response;
+  } catch (error) {
+    return rejectWithValue("Something went wrong");
+  }
+});
 
 const plannerSlice = createSlice({
   name: "planner",
@@ -32,6 +43,15 @@ const plannerSlice = createSlice({
     addItem: (state, action: PayloadAction<Item>) => {
       state.items.push(action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchItems.fulfilled, (state, action) => {
+      state.items = action.payload;
+    });
+
+    builder.addCase(fetchPostItem.fulfilled, (state, action) => {
+      state.items = [...state.items, action.payload];
+    });
   },
 });
 

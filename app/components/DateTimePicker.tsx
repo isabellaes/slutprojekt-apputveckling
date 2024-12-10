@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import {
   Text,
   Button,
@@ -10,11 +10,10 @@ import {
   IconButton,
 } from "react-native-paper";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
-import { Item } from "../utils/Types";
+import { DTOItem } from "../utils/Types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
-import { addItem } from "../redux/plannerSlice";
-import { generateRandomId } from "../utils/getRandomId";
+import { fetchPostItem } from "../redux/plannerSlice";
 
 export const DateTimePickerExample = () => {
   const [date, setDate] = useState(new Date());
@@ -24,12 +23,11 @@ export const DateTimePickerExample = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   function saveActivity() {
-    const item: Item = {
-      id: generateRandomId(),
+    const item: DTOItem = {
       title: title,
       date: date.toISOString(),
     };
-    dispatch(addItem(item));
+    dispatch(fetchPostItem(item));
   }
 
   const onChange = (event: any, selectedDate: Date | undefined) => {

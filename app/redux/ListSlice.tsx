@@ -1,76 +1,40 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { List, ListItem } from "../utils/Types";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { List, ListItem, DTOList } from "../utils/Types";
+import { getLists, postList } from "../utils/api";
 
 type ListState = {
   lists: List[];
 };
 
 const initialState: ListState = {
-  lists: [
-    {
-      id: "1",
-      title: "Städlista",
-      items: [
-        {
-          title: "Damma",
-          description: "Damma",
-          status: "unchecked",
-        },
-        {
-          title: "Dammsuga",
-          description: "",
-          status: "unchecked",
-        },
-        {
-          title: "Städa kök",
-          description: "",
-          status: "unchecked",
-        },
-        {
-          title: "Städa toalett",
-          description: "",
-          status: "unchecked",
-        },
-        {
-          title: "Moppa",
-          description: "",
-          status: "unchecked",
-        },
-      ],
-    },
-    {
-      id: "2",
-      title: "Morgonrutiner",
-      items: [
-        {
-          title: "Mata katterna",
-          description: "",
-          status: "unchecked",
-        },
-        {
-          title: "Äta frukost",
-          description: "",
-          status: "unchecked",
-        },
-        {
-          title: "Ta mediciner",
-          description: "",
-          status: "unchecked",
-        },
-        {
-          title: "Plocka ur diskmaskinen",
-          description: "",
-          status: "unchecked",
-        },
-        {
-          title: "Borsta tänderna",
-          description: "",
-          status: "unchecked",
-        },
-      ],
-    },
-  ],
+  lists: [],
 };
+
+export const fetchLists = createAsyncThunk<
+  List[],
+  void,
+  { rejectValue: string }
+>("list/fetchLists", async (_, { rejectWithValue }) => {
+  try {
+    const response = await getLists();
+    return response;
+  } catch (error) {
+    return rejectWithValue("Something went wrong");
+  }
+});
+
+export const fetchPostList = createAsyncThunk<
+  List,
+  DTOList,
+  { rejectValue: string }
+>("list/fetchPostList", async (data, { rejectWithValue }) => {
+  try {
+    const response = await postList(data);
+    return response;
+  } catch (error) {
+    return rejectWithValue("Something went wrong");
+  }
+});
 
 const listSlice = createSlice({
   name: "list",
@@ -85,7 +49,7 @@ const listSlice = createSlice({
     ) => {
       const { id, item } = action.payload;
 
-      const list = state.lists.find((l) => l.id === id);
+      const list = state.lists.find((l) => l._id === id);
       if (list) {
         const listItem = list.items.find((i) => i.title === item.title);
         if (listItem) {
@@ -94,8 +58,19 @@ const listSlice = createSlice({
       }
     },
     deleteList: (state, action: PayloadAction<{ id: string }>) => {
-      state.lists = state.lists.filter((list) => list.id !== action.payload.id);
+      state.lists = state.lists.filter(
+        (list) => list._id !== action.payload.id
+      );
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchLists.fulfilled, (state, action) => {
+      state.lists = action.payload;
+    });
+
+    builder.addCase(fetchPostList.fulfilled, (state, action) => {
+      state.lists = [...state.lists, action.payload];
+    });
   },
 });
 

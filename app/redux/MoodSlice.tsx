@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Mood } from "../utils/Types";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DTOMood, Mood } from "../utils/Types";
+import { getMoods, postMood } from "../utils/api";
 
 type MoodState = {
   moods: Mood[];
@@ -8,6 +9,32 @@ type MoodState = {
 const initialState: MoodState = {
   moods: [],
 };
+
+export const fetchMoods = createAsyncThunk<
+  Mood[],
+  void,
+  { rejectValue: string }
+>("mood/fetchMoods", async (_, { rejectWithValue }) => {
+  try {
+    const response = await getMoods();
+    return response;
+  } catch (error) {
+    return rejectWithValue("Something went wrong");
+  }
+});
+
+export const fetchPostMood = createAsyncThunk<
+  Mood,
+  DTOMood,
+  { rejectValue: string }
+>("mood/fetchPostMood", async (data, { rejectWithValue }) => {
+  try {
+    const response = await postMood(data);
+    return response;
+  } catch (error) {
+    return rejectWithValue("Something went wrong");
+  }
+});
 
 const moodSlice = createSlice({
   name: "mood",
@@ -23,6 +50,15 @@ const moodSlice = createSlice({
         state.moods.push(action.payload);
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchMoods.fulfilled, (state, action) => {
+      state.moods = action.payload;
+    });
+
+    builder.addCase(fetchPostMood.fulfilled, (state, action) => {
+      state.moods = [...state.moods, action.payload];
+    });
   },
 });
 

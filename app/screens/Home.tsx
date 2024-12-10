@@ -65,7 +65,7 @@ const Home = () => {
               {itemsToday && itemsToday.length > 0 ? (
                 <>
                   {itemsToday?.map((i) => (
-                    <Text key={i.id}>
+                    <Text key={i._id}>
                       {i?.title} {i?.date.split("T")[1].slice(0, 5)}
                     </Text>
                   ))}
@@ -79,7 +79,7 @@ const Home = () => {
               {itemsTomorrow && itemsTomorrow.length > 0 ? (
                 <>
                   {itemsTomorrow?.map((i) => (
-                    <Text key={i.id}>
+                    <Text key={i._id}>
                       {i?.title} {i?.date.split("T")[1].slice(0, 5)}
                     </Text>
                   ))}
@@ -96,7 +96,7 @@ const Home = () => {
           <View style={[styles.box, { borderColor: theme.colors.primary }]}>
             <Text variant="titleMedium">Mina Listor</Text>
             {lists?.map((list) => (
-              <Text key={list.id}>{list.title}</Text>
+              <Text key={list._id}>{list.title}</Text>
             ))}
           </View>
         ) : (

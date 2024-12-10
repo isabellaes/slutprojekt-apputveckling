@@ -27,7 +27,7 @@ const Lists = () => {
         {lists.map((list) => (
           <View
             style={[styles.list, { borderColor: theme.colors.primary }]}
-            key={list.id}
+            key={list._id}
           >
             <Text variant="titleMedium">{list.title}</Text>
             {list.items.map((item) => (
@@ -40,13 +40,13 @@ const Lists = () => {
                       item.status === "checked" ? "unchecked" : "checked";
                     const newItem: ListItem = { ...item, status: status };
                     dispatch(
-                      updateStatusOnItem({ id: list.id, item: newItem })
+                      updateStatusOnItem({ id: list._id, item: newItem })
                     );
                   }}
                 />
               </View>
             ))}
-            <Button onPress={() => dispatch(deleteList({ id: list.id }))}>
+            <Button onPress={() => dispatch(deleteList({ id: list._id }))}>
               Radera lista
             </Button>
           </View>

@@ -61,10 +61,12 @@ const Planner = () => {
       />
       {selectedDate?.map((i) => (
         <View
-          key={i.id}
+          key={i._id}
           style={{ width: "100%", alignItems: "center", padding: 15 }}
         >
-          <Text>{i?.date.split("T")[0]}</Text>
+          <Text>
+            {i?.title} {i?.date.split("T")[1].slice(0, 5)}
+          </Text>
           <Text>{i?.title}</Text>
         </View>
       ))}
