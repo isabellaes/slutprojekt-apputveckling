@@ -1,4 +1,4 @@
-# Slutprojekt Apputveckling
+# Slutprojekt Apputveckling - NPF Planner
 
 En app för personer med adhd/autism, för att skapa strategier att hantera vardagen.
 
