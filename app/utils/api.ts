@@ -21,6 +21,7 @@ export async function getLists() {
 }
 
 export async function postList(list: DTOList) {
+  console.log(JSON.stringify({ ...list }));
   try {
     const response = await fetch(`${url}/list`, {
       method: "POST",

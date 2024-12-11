@@ -7,11 +7,11 @@ const listSchema = new mongoose.Schema({
   items: [
     {
       title: { type: String },
-      description: { type: String },
-      status: { type: String,
-         enum: ["checked", "unchecked", "indeterminate"], // Enforce valid values
+      status: {
+        type: String,
+        enum: ["checked", "unchecked", "indeterminate"],
         default: "unchecked",
-       },
+      },
     },
   ],
 });

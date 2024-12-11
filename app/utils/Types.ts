@@ -1,7 +1,6 @@
 export type ListItem = {
   _id: string;
   title: string;
-  description: string;
   deadline?: Date;
   status: "checked" | "unchecked" | "indeterminate";
 };
@@ -13,8 +12,6 @@ export type List = {
 
 export type DTOListItem = {
   title: string;
-  description: string;
-  deadline?: Date;
   status: "checked" | "unchecked" | "indeterminate";
 };
 

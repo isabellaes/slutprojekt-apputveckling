@@ -33,7 +33,6 @@ const CreateNewList = () => {
   function updateList(title: string) {
     const newItem: DTOListItem = {
       title: title,
-      description: "",
       status: "unchecked",
     };
     setList([...list, newItem]);
