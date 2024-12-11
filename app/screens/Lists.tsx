@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
 import { List } from "../utils/Types";
-import { deleteList, fetchUpdateList } from "../redux/ListSlice";
+import {
+  deleteList,
+  fetchDeleteListById,
+  fetchUpdateList,
+} from "../redux/ListSlice";
 import CreateNewList from "../components/CreateNewList";
 
 const Lists = () => {
@@ -50,7 +54,7 @@ const Lists = () => {
                 />
               </View>
             ))}
-            <Button onPress={() => dispatch(deleteList({ id: list._id }))}>
+            <Button onPress={() => dispatch(fetchDeleteListById(list._id))}>
               Radera lista
             </Button>
           </View>

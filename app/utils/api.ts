@@ -57,6 +57,22 @@ export async function updateList(list: UpdateListItem) {
   }
 }
 
+export async function deleteListById(id: string) {
+  try {
+    const response = await fetch(`${url}/list/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    return {};
+  }
+}
+
 //MOOD
 
 export async function getMoods() {

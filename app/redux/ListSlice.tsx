@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { List, ListItem, DTOList, UpdateListItem } from "../utils/Types";
-import { getLists, postList, updateList } from "../utils/api";
+import { deleteListById, getLists, postList, updateList } from "../utils/api";
 
 type ListState = {
   lists: List[];
@@ -49,6 +49,19 @@ export const fetchUpdateList = createAsyncThunk<
   }
 });
 
+export const fetchDeleteListById = createAsyncThunk<
+  List,
+  string,
+  { rejectValue: string }
+>("list/fetchDeleteListById", async (id, { rejectWithValue }) => {
+  try {
+    const response = await deleteListById(id);
+    return response;
+  } catch (error) {
+    return rejectWithValue("Something went wrong");
+  }
+});
+
 const listSlice = createSlice({
   name: "list",
   initialState,
@@ -72,6 +85,11 @@ const listSlice = createSlice({
 
       state.lists = state.lists.map((list) =>
         list._id === data._id ? action.payload : list
+      );
+    });
+    builder.addCase(fetchDeleteListById.fulfilled, (state, action) => {
+      state.lists = state.lists.filter(
+        (list) => list._id !== action.payload._id
       );
     });
   },

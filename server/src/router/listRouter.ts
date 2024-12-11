@@ -45,9 +45,9 @@ export function listRouter() {
 
   router.delete("/:id", async (req: Request, res: Response) => {
     try {
-      const data = req.params;
-      await listModel.findOneAndDelete({ _id: data });
-      res.status(200).send({ message: "Deleted sucessfully" });
+      const data = req.params.id;
+      const result = await listModel.findOneAndDelete({ _id: data });
+      res.status(200).send(result);
     } catch (error) {
       res.status(404).send({ message: "Error deleting data" });
       console.log(error);
