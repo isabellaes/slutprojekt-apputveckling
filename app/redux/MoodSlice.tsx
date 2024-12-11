@@ -57,7 +57,14 @@ const moodSlice = createSlice({
     });
 
     builder.addCase(fetchPostMood.fulfilled, (state, action) => {
-      state.moods = [...state.moods, action.payload];
+      const existingMoodIndex = state.moods.findIndex(
+        (m) => m.date.split("T")[0] === action.payload.date.split("T")[0]
+      );
+      if (existingMoodIndex >= 0) {
+        state.moods[existingMoodIndex] = action.payload;
+      } else {
+        state.moods.push(action.payload);
+      }
     });
   },
 });

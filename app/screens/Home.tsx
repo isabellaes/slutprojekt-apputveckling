@@ -2,14 +2,16 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
-import { Item, List } from "../utils/Types";
+import { Item, List, Mood } from "../utils/Types";
 import { SettingsState } from "../redux/SettingsSlice";
 import { useTheme, Text } from "react-native-paper";
+import MoodAvatar from "../components/MoodAvatar";
 
 const Home = () => {
   const [itemsToday, setItemsToday] = useState<Item[]>();
   const [itemsTomorrow, setItemsTomorrow] = useState<Item[]>();
   const [lists, setLists] = useState<List[]>();
+  const [mood, setMood] = useState<Mood>();
   const [settings, setSettings] = useState<SettingsState>();
 
   const date = new Date();
@@ -25,6 +27,10 @@ const Home = () => {
   const settingState = useSelector<RootState>(
     (state) => state.settings
   ) as SettingsState;
+
+  const moodData = useSelector<RootState>(
+    (state) => state.mood.moods
+  ) as Mood[];
 
   useEffect(() => {
     setSettings(settingState);
@@ -48,6 +54,15 @@ const Home = () => {
       setLists(dataLists);
     }
   }, [dataLists]);
+
+  useEffect(() => {
+    if (moodData) {
+      const todayMood = moodData.find(
+        (m) => m.date.split("T")[0] === date.toISOString().split("T")[0]
+      );
+      setMood(todayMood);
+    }
+  }, [moodData]);
 
   const theme = useTheme();
   return (
@@ -98,6 +113,18 @@ const Home = () => {
             {lists?.map((list) => (
               <Text key={list._id}>{list.title}</Text>
             ))}
+          </View>
+        ) : (
+          <></>
+        )}
+        {settings?.home.moodtracker ? (
+          <View style={[styles.box, { borderColor: theme.colors.primary }]}>
+            <Text variant="titleMedium">Dagens mood</Text>
+            {mood ? (
+              <MoodAvatar img={mood.img} selected={false} />
+            ) : (
+              <Text>Inget registrerat idag</Text>
+            )}
           </View>
         ) : (
           <></>

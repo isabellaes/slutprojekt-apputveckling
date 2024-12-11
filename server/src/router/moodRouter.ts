@@ -14,21 +14,25 @@ export function moodRouter() {
     }
   });
 
-  router.post("/", async (req: Request, res: Response) => {
+  router.put("/", async (req: Request, res: Response) => {
     try {
-      const data = req.body;
-      const result = await moodModel.create(data);
-      res.status(201).send(result);
+      const mood = req.body;
+      const result = await moodModel.findOneAndUpdate(
+        { date: mood.date },
+        { $set: { ...mood } },
+        { upsert: true, new: true }
+      );
+      res.status(200).send(result);
     } catch (error) {
       res.status(404).send({ message: "Error posting data" });
       console.log(error);
     }
   });
 
-  router.patch("/", async (req: Request, res: Response) => {
+  router.delete("/:id", async (req: Request, res: Response) => {
     try {
-      const data = req.body;
-      await moodModel.findOneAndDelete({ _id: data._id });
+      const data = req.params.id;
+      await moodModel.findOneAndDelete({ _id: data });
       res.status(200).send({ message: "Deleted sucessfully" });
     } catch (error) {
       res.status(404).send({ message: "Error deleting data" });

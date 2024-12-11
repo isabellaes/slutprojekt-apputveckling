@@ -94,7 +94,7 @@ export async function getMoods() {
 export async function postMood(mood: DTOMood) {
   try {
     const response = await fetch(`${url}/mood`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
