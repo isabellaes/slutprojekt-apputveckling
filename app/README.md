@@ -2,7 +2,7 @@
 
 En app för personer med adhd/autism, för att skapa strategier att hantera vardagen.
 
-Appen är byggd med react native och expo. 
+Appen är byggd med react native och expo.
 
 react-native-calenders för att visa kalender
 
@@ -12,14 +12,25 @@ easytimer.js för timer
 
 ## Installation
 
-```bash
+Installera och starta app
 
+```bash
+cd app
 npm install
 npm start
 
 ```
 
-### Planering
+Installera och starta server
+
+```bash
+cd server
+npm install
+npm run dev
+
+```
+
+### Planering Kalender
 
 Kalender där du kan lägga till händelser. Klicka på ett specifikt datum och få detaljer om planerade aktiviteter denna dag.
 
@@ -35,3 +46,7 @@ Skapa checklistor för olika rutiner i vardagen, eller inköpslista/Todo lista.
 
 Välj vilka komponenter du vill ha med på din hemskärm. Du kan välja mellan planerade aktiviteter/listor/moodtracker.
 Välj om du vill ha mörkt eller ljust tema.
+
+### Moodtracker
+
+Registrera dagens mood och se statistik.
