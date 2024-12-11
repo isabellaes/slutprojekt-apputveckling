@@ -58,7 +58,7 @@ const Home = () => {
   useEffect(() => {
     if (moodData) {
       const todayMood = moodData.find(
-        (m) => m.date.split("T")[0] === date.toISOString().split("T")[0]
+        (m) => m.date === date.toISOString().split("T")[0]
       );
       setMood(todayMood);
     }

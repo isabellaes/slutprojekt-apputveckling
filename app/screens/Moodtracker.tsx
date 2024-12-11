@@ -7,6 +7,7 @@ import { DTOMood, Mood } from "../utils/Types";
 import mapImages from "../utils/imageMapper";
 import { fetchPostMood } from "../redux/MoodSlice";
 import MoodAvatar from "../components/MoodAvatar";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Moodtracker = () => {
   const [moodData, setMoodData] = useState<Mood[]>([]);
@@ -27,7 +28,7 @@ const Moodtracker = () => {
   ];
 
   useEffect(() => {
-    if (data) setMoodData(data);
+    if (data) setMoodData(data.toReversed());
   }, [data]);
 
   const theme = useTheme();
@@ -45,7 +46,7 @@ const Moodtracker = () => {
   function registerTodaysMood() {
     dispatch(
       fetchPostMood({
-        date: today.toISOString(),
+        date: today.toISOString().split("T")[0],
         img: todayMood.img,
         notes: todayMood.notes,
       })
@@ -82,13 +83,15 @@ const Moodtracker = () => {
 
       <View style={styles.statisticsContainer}>
         <Text variant="titleLarge">Statistik</Text>
-        {moodData.map((m) => (
-          <View style={styles.statisticsContainer} key={m._id}>
-            <Text>{m.date.split("T")[0]}</Text>
-            {getImageAvatar(m.img)}
-            <Text>{m.notes}</Text>
-          </View>
-        ))}
+        <ScrollView contentContainerStyle={{ width: 200 }}>
+          {moodData.map((m) => (
+            <View style={styles.statisticsContainer} key={m._id}>
+              <Text>{m.date}</Text>
+              {getImageAvatar(m.img)}
+              <Text>{m.notes}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
