@@ -13,15 +13,15 @@ import { useEffect } from "react";
 import { fetchLists } from "../redux/ListSlice";
 import { fetchMoods } from "../redux/MoodSlice";
 import { fetchItems } from "../redux/plannerSlice";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 export type RootStackParamList = {
-  Home: undefined;
-  Settings: undefined;
-  Planner: undefined;
-  Lists: undefined;
+  Hem: undefined;
+  Inställningar: undefined;
+  Kalender: undefined;
+  Listor: undefined;
   Moodtracker: undefined;
   Timer: undefined;
-  CreateNewList: undefined;
 };
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
@@ -46,12 +46,60 @@ const Navigator = () => {
   return (
     <NavigationContainer theme={theme.dark ? DarkTheme : LightTheme}>
       <Drawer.Navigator screenOptions={{}}>
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Settings" component={Settings} />
-        <Drawer.Screen name="Planner" component={Planner} />
-        <Drawer.Screen name="Lists" component={Lists} />
-        <Drawer.Screen name="Moodtracker" component={Moodtracker} />
-        <Drawer.Screen name="Timer" component={TimerScreen} />
+        <Drawer.Screen
+          name="Hem"
+          options={{
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="home-outline" size={size} color={color} />
+            ),
+          }}
+          component={Home}
+        />
+        <Drawer.Screen
+          name="Inställningar"
+          component={Settings}
+          options={{
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="settings-outline" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Kalender"
+          component={Planner}
+          options={{
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons name="calendar-today" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Listor"
+          component={Lists}
+          options={{
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="list-outline" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Moodtracker"
+          component={Moodtracker}
+          options={{
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="happy-outline" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Timer"
+          component={TimerScreen}
+          options={{
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="timer-outline" size={size} color={color} />
+            ),
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
