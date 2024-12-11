@@ -5,7 +5,7 @@ import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import { Item } from "../utils/Types";
 import { useTheme, Text } from "react-native-paper";
-import { DateTimePickerExample } from "../components/DateTimePicker";
+import { DateTimePicker } from "../components/DateTimePicker";
 
 const Planner = () => {
   const [selectedDate, setSelectedDate] = useState<Item[]>([]);
@@ -67,11 +67,10 @@ const Planner = () => {
           <Text>
             {i?.title} {i?.date.split("T")[1].slice(0, 5)}
           </Text>
-          <Text>{i?.title}</Text>
         </View>
       ))}
 
-      <DateTimePickerExample />
+      <DateTimePicker />
     </View>
   );
 };

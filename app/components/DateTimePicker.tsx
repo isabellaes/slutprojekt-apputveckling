@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { fetchPostItem } from "../redux/plannerSlice";
 
-export const DateTimePickerExample = () => {
+export const DateTimePicker = () => {
   const [date, setDate] = useState(new Date());
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState("");
