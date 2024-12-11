@@ -11,7 +11,7 @@ import { View, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { useState } from "react";
-import { DTOList, ListItem } from "../utils/Types";
+import { DTOList, DTOListItem } from "../utils/Types";
 import { fetchPostList } from "../redux/ListSlice";
 
 const CreateNewList = () => {
@@ -23,7 +23,7 @@ const CreateNewList = () => {
       key={0}
     />,
   ]);
-  const [list, setList] = useState<ListItem[]>([]);
+  const [list, setList] = useState<DTOListItem[]>([]);
   const [title, setTitle] = useState("");
   const [visible, setVisible] = useState(false);
 
@@ -31,7 +31,7 @@ const CreateNewList = () => {
   const theme = useTheme();
 
   function updateList(title: string) {
-    const newItem: ListItem = {
+    const newItem: DTOListItem = {
       title: title,
       description: "",
       status: "unchecked",

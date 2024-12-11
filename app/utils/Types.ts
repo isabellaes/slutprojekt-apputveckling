@@ -1,4 +1,5 @@
 export type ListItem = {
+  _id: string;
   title: string;
   description: string;
   deadline?: Date;
@@ -10,9 +11,16 @@ export type List = {
   items: ListItem[];
 };
 
+export type DTOListItem = {
+  title: string;
+  description: string;
+  deadline?: Date;
+  status: "checked" | "unchecked" | "indeterminate";
+};
+
 export type DTOList = {
   title: string;
-  items: ListItem[];
+  items: DTOListItem[];
 };
 
 export type Item = {
@@ -37,4 +45,10 @@ export type DTOMood = {
   img: string;
   date: string;
   notes: string;
+};
+
+export type UpdateListItem = {
+  listId: string;
+  itemId: string;
+  item: ListItem;
 };

@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { listModel } from "../database/models/listModel";
+import mongoose from "mongoose";
 
 export function listRouter() {
   const router = express.Router();
@@ -27,8 +28,14 @@ export function listRouter() {
 
   router.patch("/", async (req: Request, res: Response) => {
     try {
-      const data = req.body;
-      const result = await listModel.findByIdAndUpdate(data);
+      const { listId, itemId, item } = req.body;
+
+      const result = await listModel.findOneAndUpdate(
+        { _id: listId, "items._id": itemId },
+        { $set: { "items.$": item } },
+        { new: true }
+      );
+
       res.status(201).send(result);
     } catch (error) {
       res.status(404).send({ message: "Error updating data" });

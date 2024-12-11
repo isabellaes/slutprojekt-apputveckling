@@ -3,8 +3,8 @@ import { Checkbox, Text, useTheme, FAB, Button } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
-import { List, ListItem } from "../utils/Types";
-import { updateStatusOnItem, deleteList } from "../redux/ListSlice";
+import { List } from "../utils/Types";
+import { deleteList, fetchUpdateList } from "../redux/ListSlice";
 import CreateNewList from "../components/CreateNewList";
 
 const Lists = () => {
@@ -31,16 +31,20 @@ const Lists = () => {
           >
             <Text variant="titleMedium">{list.title}</Text>
             {list.items.map((item) => (
-              <View style={styles.listItem} key={item.title}>
+              <View style={styles.listItem} key={item._id}>
                 <Text>{item.title}</Text>
                 <Checkbox
                   status={item.status}
                   onPress={() => {
                     const status: "checked" | "unchecked" | "indeterminate" =
                       item.status === "checked" ? "unchecked" : "checked";
-                    const newItem: ListItem = { ...item, status: status };
+                    const newItem = { ...item, status: status };
                     dispatch(
-                      updateStatusOnItem({ id: list._id, item: newItem })
+                      fetchUpdateList({
+                        listId: list._id,
+                        itemId: item._id,
+                        item: newItem,
+                      })
                     );
                   }}
                 />

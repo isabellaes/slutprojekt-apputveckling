@@ -1,4 +1,4 @@
-import { DTOItem, DTOList, DTOMood } from "./Types";
+import { DTOItem, DTOList, DTOMood, UpdateListItem } from "./Types";
 
 const url = "http://10.0.2.2:3000";
 
@@ -37,15 +37,17 @@ export async function postList(list: DTOList) {
   }
 }
 
-export async function updateList(list: DTOList) {
+export async function updateList(list: UpdateListItem) {
+  console.log(JSON.stringify({ ...list }));
   try {
     const response = await fetch(`${url}/list`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-      body: JSON.stringify({ list }),
+      body: JSON.stringify({ ...list }),
     });
+
     const result = await response.json();
     return result;
   } catch (error) {
