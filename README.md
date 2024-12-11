@@ -2,7 +2,7 @@
 
 En app för personer med adhd/autism, för att skapa strategier att hantera vardagen.
 
-Appen är byggd med react native och expo.
+Appen är byggd med react native och expo. Servern är byggd med node, express och mongodb databas.
 
 react-native-calenders för att visa kalender
 
