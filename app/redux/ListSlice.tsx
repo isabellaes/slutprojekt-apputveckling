@@ -65,13 +65,7 @@ export const fetchDeleteListById = createAsyncThunk<
 const listSlice = createSlice({
   name: "list",
   initialState,
-  reducers: {
-    deleteList: (state, action: PayloadAction<{ id: string }>) => {
-      state.lists = state.lists.filter(
-        (list) => list._id !== action.payload.id
-      );
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchLists.fulfilled, (state, action) => {
       state.lists = action.payload;
@@ -95,6 +89,6 @@ const listSlice = createSlice({
   },
 });
 
-export const { deleteList } = listSlice.actions;
+export const {} = listSlice.actions;
 
 export default listSlice.reducer;

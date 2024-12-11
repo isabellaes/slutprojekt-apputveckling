@@ -25,10 +25,10 @@ export function itemRouter() {
     }
   });
 
-  router.delete("/", async (req: Request, res: Response) => {
+  router.delete("/:id", async (req: Request, res: Response) => {
     try {
-      const data = req.body;
-      await itemModel.findOneAndDelete({ _id: data._id });
+      const data = req.params.id;
+      await itemModel.findOneAndDelete({ _id: data });
       res.status(200).send({ message: "Deleted sucessfully" });
     } catch (error) {
       res.status(404).send({ message: "Error deleting data" });

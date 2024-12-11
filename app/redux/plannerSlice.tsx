@@ -39,11 +39,7 @@ export const fetchPostItem = createAsyncThunk<
 const plannerSlice = createSlice({
   name: "planner",
   initialState,
-  reducers: {
-    addItem: (state, action: PayloadAction<Item>) => {
-      state.items.push(action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchItems.fulfilled, (state, action) => {
       state.items = action.payload;
@@ -55,6 +51,6 @@ const plannerSlice = createSlice({
   },
 });
 
-export const { addItem } = plannerSlice.actions;
+export const { } = plannerSlice.actions;
 
 export default plannerSlice.reducer;

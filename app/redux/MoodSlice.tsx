@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DTOMood, Mood } from "../utils/Types";
 import { getMoods, postMood } from "../utils/api";
 
@@ -39,18 +39,7 @@ export const fetchPostMood = createAsyncThunk<
 const moodSlice = createSlice({
   name: "mood",
   initialState,
-  reducers: {
-    addMood: (state, action: PayloadAction<Mood>) => {
-      const existingMoodIndex = state.moods.findIndex(
-        (m) => m.date.split("T")[0] === action.payload.date.split("T")[0]
-      );
-      if (existingMoodIndex >= 0) {
-        state.moods[existingMoodIndex] = action.payload;
-      } else {
-        state.moods.push(action.payload);
-      }
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMoods.fulfilled, (state, action) => {
       state.moods = action.payload;
@@ -69,6 +58,6 @@ const moodSlice = createSlice({
   },
 });
 
-export const { addMood } = moodSlice.actions;
+export const {} = moodSlice.actions;
 
 export default moodSlice.reducer;

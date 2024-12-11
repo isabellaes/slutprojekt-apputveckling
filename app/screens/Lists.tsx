@@ -5,7 +5,6 @@ import { RootState, AppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
 import { List } from "../utils/Types";
 import {
-  deleteList,
   fetchDeleteListById,
   fetchUpdateList,
 } from "../redux/ListSlice";
