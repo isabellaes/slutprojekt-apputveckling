@@ -35,13 +35,13 @@ export type Mood = {
   _id: string;
   img: string;
   date: string;
-  notes: string;
+  note: string;
 };
 
 export type DTOMood = {
   img: string;
   date: string;
-  notes: string;
+  note: string;
 };
 
 export type UpdateListItem = {

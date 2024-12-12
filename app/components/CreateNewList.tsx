@@ -88,7 +88,13 @@ const CreateNewList = () => {
 
               <Button onPress={addListItem}>Add item</Button>
             </ScrollView>
-            <Button mode="contained" onPress={createList}>
+            <Button
+              mode="contained"
+              onPress={() => {
+                createList();
+                setVisible(false);
+              }}
+            >
               Skapa lista
             </Button>
           </View>

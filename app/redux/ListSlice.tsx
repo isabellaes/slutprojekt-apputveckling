@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { List, ListItem, DTOList, UpdateListItem } from "../utils/Types";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { List, DTOList, UpdateListItem } from "../utils/Types";
 import { deleteListById, getLists, postList, updateList } from "../utils/api";
 
 type ListState = {

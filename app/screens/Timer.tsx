@@ -22,17 +22,16 @@ const TimerScreen = () => {
     countdown: true,
   });
 
+  timer.addEventListener("targetAchieved", () => {
+    setVisible(true);
+  });
+  timer2.addEventListener("targetAchieved", () => {
+    setVisible(true);
+  });
+
   const [visible, setVisible] = useState(false);
 
   const theme = useTheme();
-
-  useEffect(() => {
-    if (
-      timer.getTimeValues().minutes == 0 &&
-      timer.getTimeValues().seconds == 0
-    )
-      setVisible(true);
-  });
 
   return (
     <View
@@ -62,7 +61,7 @@ const TimerScreen = () => {
           },
         }}
       >
-        Hey there! Times up!!
+        Tiden är ute!
       </Snackbar>
     </View>
   );

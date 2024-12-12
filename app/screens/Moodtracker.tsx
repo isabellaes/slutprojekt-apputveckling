@@ -13,7 +13,7 @@ const Moodtracker = () => {
   const [moodData, setMoodData] = useState<Mood[]>([]);
   const [todayMood, setTodayMood] = useState<DTOMood>({
     img: "",
-    notes: "",
+    note: "",
     date: "",
   });
   const data = useSelector<RootState>((state) => state.mood.moods) as Mood[];
@@ -48,7 +48,7 @@ const Moodtracker = () => {
       fetchPostMood({
         date: today.toISOString().split("T")[0],
         img: todayMood.img,
-        notes: todayMood.notes,
+        note: todayMood.note,
       })
     );
   }
@@ -75,8 +75,8 @@ const Moodtracker = () => {
       </View>
       <Text>Skriv ner dina tankar för dagen: </Text>
       <TextInput
-        value={todayMood.notes}
-        onChangeText={(notes) => setTodayMood({ ...todayMood, notes: notes })}
+        value={todayMood.note}
+        onChangeText={(notes) => setTodayMood({ ...todayMood, note: notes })}
         style={{ width: 300 }}
       />
       <Button onPress={() => registerTodaysMood()}>Spara</Button>
@@ -88,7 +88,7 @@ const Moodtracker = () => {
             <View style={styles.statisticsContainer} key={m._id}>
               <Text>{m.date}</Text>
               {getImageAvatar(m.img)}
-              <Text>{m.notes}</Text>
+              <Text>{m.note}</Text>
             </View>
           ))}
         </ScrollView>

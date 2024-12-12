@@ -35,6 +35,9 @@ const Navigator = () => {
     reactNavigationDark: DefaultTheme,
   });
 
+  const CustomLightTheme = { ...LightTheme, fonts: DefaultTheme.fonts };
+  const CustomDarkTheme = { ...DarkTheme, fonts: DefaultTheme.fonts };
+
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -44,16 +47,18 @@ const Navigator = () => {
   }, [dispatch]);
 
   return (
-    <NavigationContainer theme={theme.dark ? DarkTheme : LightTheme}>
+    <NavigationContainer
+      theme={theme.dark ? CustomDarkTheme : CustomLightTheme}
+    >
       <Drawer.Navigator screenOptions={{}}>
         <Drawer.Screen
           name="Hem"
+          component={Home}
           options={{
             drawerIcon: ({ color, size }) => (
               <Ionicons name="home-outline" size={size} color={color} />
             ),
           }}
-          component={Home}
         />
         <Drawer.Screen
           name="Inställningar"
