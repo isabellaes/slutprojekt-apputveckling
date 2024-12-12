@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { Button, Snackbar, useTheme, Text } from "react-native-paper";
 import useTimer from "easytimer-react-hook";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TimerScreen = () => {
   const [timer] = useTimer({

@@ -6,6 +6,7 @@ import { Item, List, Mood } from "../utils/Types";
 import { SettingsState } from "../redux/SettingsSlice";
 import { useTheme, Text } from "react-native-paper";
 import MoodAvatar from "../components/MoodAvatar";
+import React from "react";
 
 const Home = () => {
   const [itemsToday, setItemsToday] = useState<Item[]>();
