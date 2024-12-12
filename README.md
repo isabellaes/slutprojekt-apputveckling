@@ -23,6 +23,8 @@ npm start
 
 Installera och starta server
 
+Servern körs med en lokal databas, för att fungera korrekt behöver man ha en lokal mongodb anslutning så kommer serven skapa upp en db om det inte finns.
+
 ```bash
 cd server
 npm install

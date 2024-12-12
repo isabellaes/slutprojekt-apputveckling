@@ -57,7 +57,7 @@ const TimerScreen = () => {
         action={{
           label: "Undo",
           onPress: () => {
-            // Do something
+            setVisible(false);
           },
         }}
       >
